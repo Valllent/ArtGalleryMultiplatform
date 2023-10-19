@@ -1,16 +1,27 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.application")
-    id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
 kotlin {
     androidTarget()
+    jvm("desktop")
+
     sourceSets {
+        val commonMain by getting {
+            dependencies {
+
+            }
+        }
         val androidMain by getting {
             dependencies {
-                implementation(project(":shared:domain"))
-                implementation(project(":shared:ui"))
+                api("androidx.appcompat:appcompat:1.6.1")
+                api("androidx.core:core-ktx:1.10.1")
+            }
+        }
+        val desktopMain by getting {
+            dependencies {
+
             }
         }
     }
@@ -18,16 +29,14 @@ kotlin {
 
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.valllent.art"
+    namespace = "com.valllent.art.common.domain"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    sourceSets["main"].res.srcDirs("src/androidMain/res")
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.valllent.art.MyApplication"
         minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
-        versionCode = 1
-        versionName = "1.0"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

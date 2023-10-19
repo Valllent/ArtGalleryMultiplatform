@@ -1,8 +1,9 @@
 rootProject.name = "PocketArtInstitute"
 
 include(":androidApp")
-include(":shared")
 include(":desktopApp")
+include(":shared:domain")
+include(":shared:ui")
 
 pluginManagement {
     // Repositories for plugins
