@@ -1,10 +1,9 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
-    id("org.jetbrains.compose")
 }
 
-@OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
     androidTarget()
     jvm("desktop")
@@ -12,14 +11,17 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // Logic
-                implementation(project(":shared:logic"))
+                // Ktor
+                implementation("io.ktor:ktor-client-core:2.3.3")
+                implementation("io.ktor:ktor-client-logging:2.3.3")
+                implementation("ch.qos.logback:logback-classic:1.3.11")
+                // Ktor Serialization
+                implementation("io.ktor:ktor-client-serialization:2.3.3")
+                implementation("io.ktor:ktor-client-content-negotiation:2.3.3")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.3")
 
-                // Default Compose
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material)
-                implementation(compose.components.resources)
+                // Logger
+                implementation("io.github.aakira:napier:2.6.1")
 
                 // Koin
                 implementation("io.insert-koin:koin-core:3.1.5")
@@ -28,14 +30,23 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 // Default
-                api("androidx.activity:activity-compose:1.7.2")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.10.1")
+
+                // Ktor
+                implementation("io.ktor:ktor-client-android:2.3.3")
             }
         }
         val desktopMain by getting {
             dependencies {
-                implementation(compose.desktop.common)
+                // Ktor
+                implementation("io.ktor:ktor-client-okhttp:2.3.3")
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                // Koin
+                implementation("io.insert-koin:koin-test:3.1.5")
             }
         }
     }
@@ -43,7 +54,7 @@ kotlin {
 
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.valllent.art.common.ui"
+    namespace = "com.valllent.art.common.logic"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")

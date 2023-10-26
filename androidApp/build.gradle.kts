@@ -9,8 +9,15 @@ kotlin {
     sourceSets {
         val androidMain by getting {
             dependencies {
-                implementation(project(":shared:domain"))
+                implementation(project(":shared:logic"))
                 implementation(project(":shared:ui"))
+
+                // Logger (for initialization)
+                implementation("io.github.aakira:napier:2.6.1")
+
+                // Koin
+                implementation("io.insert-koin:koin-android:3.1.5")
+                implementation("io.insert-koin:koin-androidx-compose:3.1.5")
             }
         }
     }
@@ -32,6 +39,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    packaging {
+        resources.merges.add("META-INF/INDEX.LIST") // Fix Napier
     }
     kotlin {
         jvmToolchain(17)
