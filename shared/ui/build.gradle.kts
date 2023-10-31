@@ -22,7 +22,11 @@ kotlin {
                 implementation(compose.components.resources)
 
                 // Koin
-                implementation("io.insert-koin:koin-core:3.1.5")
+                implementation("io.insert-koin:koin-core:3.5.0")
+                implementation("io.insert-koin:koin-compose:1.1.0")
+
+                // Logger
+                implementation("io.github.aakira:napier:2.6.1")
             }
         }
         val androidMain by getting {
@@ -31,6 +35,9 @@ kotlin {
                 api("androidx.activity:activity-compose:1.7.2")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.10.1")
+
+                // ViewModel scope
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
             }
         }
         val desktopMain by getting {
@@ -43,7 +50,7 @@ kotlin {
 
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.valllent.art.common.ui"
+    namespace = "com.valllent.art.shared.ui"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")

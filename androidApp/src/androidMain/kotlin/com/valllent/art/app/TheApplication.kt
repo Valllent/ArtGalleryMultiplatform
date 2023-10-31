@@ -1,7 +1,7 @@
 package com.valllent.art.app
 
 import android.app.Application
-import com.valllent.shared.logic.di.DependenciesInitializer
+import com.valllent.shared.ui.di.DependenciesInitializer
 
 class TheApplication : Application() {
 

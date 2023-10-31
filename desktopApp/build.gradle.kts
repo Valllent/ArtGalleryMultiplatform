@@ -15,7 +15,7 @@ kotlin {
                 implementation(project(":shared:ui"))
 
                 // Koin
-                implementation("io.insert-koin:koin-core:3.1.5")
+                implementation("io.insert-koin:koin-core:3.5.0")
             }
         }
     }

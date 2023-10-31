@@ -24,7 +24,7 @@ kotlin {
                 implementation("io.github.aakira:napier:2.6.1")
 
                 // Koin
-                implementation("io.insert-koin:koin-core:3.1.5")
+                implementation("io.insert-koin:koin-core:3.5.0")
             }
         }
         val androidMain by getting {
@@ -46,7 +46,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 // Koin
-                implementation("io.insert-koin:koin-test:3.1.5")
+                implementation("io.insert-koin:koin-test:3.5.0")
             }
         }
     }
@@ -54,7 +54,7 @@ kotlin {
 
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.valllent.art.common.logic"
+    namespace = "com.valllent.art.shared.logic"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")

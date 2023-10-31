@@ -16,8 +16,8 @@ kotlin {
                 implementation("io.github.aakira:napier:2.6.1")
 
                 // Koin
-                implementation("io.insert-koin:koin-android:3.1.5")
-                implementation("io.insert-koin:koin-androidx-compose:3.1.5")
+                implementation("io.insert-koin:koin-android:3.5.0")
+                implementation("io.insert-koin:koin-androidx-compose:3.5.0")
             }
         }
     }
