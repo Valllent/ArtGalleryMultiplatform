@@ -14,4 +14,11 @@ sealed class ResultWrapper<T> {
         }
     }
 
+    fun resultOrNull(): T? {
+        if (this is Success) {
+            return this.data
+        }
+        return null
+    }
+
 }

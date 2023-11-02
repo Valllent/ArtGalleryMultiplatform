@@ -1,6 +1,7 @@
 package com.valllent.shared.logic.network.responses
 
 import com.valllent.shared.logic.domain.data.Artwork
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,6 +13,8 @@ data class ArtworkResponse(
     data class ArtworkItem(
         val id: Long? = null,
         val title: String? = null,
+        val description: String? = null,
+        @SerialName("image_id") val imageId: String? = null,
     )
 
     fun convert(): List<Artwork> {
@@ -23,7 +26,9 @@ data class ArtworkResponse(
             result.add(
                 Artwork(
                     id = id,
-                    title = item.title ?: ""
+                    title = item.title ?: "",
+                    description = item.description ?: "",
+                    imageUrl = if (item.imageId != null) "https://www.artic.edu/iiif/2/${item.imageId}/full/843,/0/default.jpg" else null
                 )
             )
         }

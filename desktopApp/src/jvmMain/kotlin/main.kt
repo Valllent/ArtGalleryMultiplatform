@@ -1,14 +1,8 @@
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
 import com.valllent.shared.ui.di.DependenciesInitializer
-import com.valllent.shared.ui.views.MainView
+import com.valllent.shared.ui.views.startUi
 
 fun main() {
     DependenciesInitializer.init()
 
-    application {
-        Window(onCloseRequest = ::exitApplication) {
-            MainView()
-        }
-    }
+    startUi()
 }

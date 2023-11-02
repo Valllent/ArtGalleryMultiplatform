@@ -9,9 +9,9 @@ class ArtworkRepositoryImpl(
     private val artworkApi: ArtworkApi
 ) : ArtworkRepository {
 
-    override suspend fun getArtworks(): ResultWrapper<List<Artwork>> {
+    override suspend fun getArtworks(page: Int): ResultWrapper<List<Artwork>> {
         return runSafely {
-            artworkApi.getArtworks().convert()
+            artworkApi.getArtworks(page).convert()
         }
     }
 

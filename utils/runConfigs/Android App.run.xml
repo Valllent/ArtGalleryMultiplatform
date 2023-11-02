@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
     <configuration default="false" name="Android App" type="AndroidRunConfigurationType"
-        factoryName="Android App">
+        factoryName="Android App" activateToolWindowBeforeRun="false">
         <module name="Art.androidApp.main" />
         <option name="DEPLOY" value="true" />
         <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />

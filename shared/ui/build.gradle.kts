@@ -27,6 +27,9 @@ kotlin {
 
                 // Logger
                 implementation("io.github.aakira:napier:2.6.1")
+
+                // Image downloader
+                implementation("media.kamel:kamel-image:0.8.2")
             }
         }
         val androidMain by getting {

@@ -8,8 +8,8 @@ class GetArtworksUseCase(
     private val artworkRepository: ArtworkRepository
 ) {
 
-    suspend operator fun invoke(): ResultWrapper<List<Artwork>> {
-        return artworkRepository.getArtworks()
+    suspend operator fun invoke(page: Int): ResultWrapper<List<Artwork>> {
+        return artworkRepository.getArtworks(page)
     }
 
 }
