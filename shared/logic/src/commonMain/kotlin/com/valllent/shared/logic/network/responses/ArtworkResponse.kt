@@ -1,6 +1,7 @@
 package com.valllent.shared.logic.network.responses
 
 import com.valllent.shared.logic.domain.data.Artwork
+import com.valllent.shared.logic.network.utils.HtmlRemover
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,11 +24,12 @@ data class ArtworkResponse(
 
         for (item in list) {
             val id = item.id ?: continue
+            val descriptionWithoutHtml = HtmlRemover.removeHtml(item.description ?: "")
             result.add(
                 Artwork(
                     id = id,
                     title = item.title ?: "",
-                    description = item.description ?: "",
+                    description = descriptionWithoutHtml,
                     imageUrl = if (item.imageId != null) "https://www.artic.edu/iiif/2/${item.imageId}/full/843,/0/default.jpg" else null
                 )
             )

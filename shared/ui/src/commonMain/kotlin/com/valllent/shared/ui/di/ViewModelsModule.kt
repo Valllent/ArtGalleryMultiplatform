@@ -9,11 +9,10 @@ object ViewModelsModule {
 
     operator fun invoke(): Module {
         return module {
-            factory {
+            single {
                 ArtworksListViewModel(get())
             }
-            factory {
-                val artworkId = it.get<Int>(0)
+            factory { (artworkId: Int) ->
                 DetailArtworkViewModel(artworkId, get())
             }
         }
