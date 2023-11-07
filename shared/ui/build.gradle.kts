@@ -18,6 +18,7 @@ kotlin {
                 // Default Compose
                 implementation(compose.runtime)
                 implementation(compose.foundation)
+                implementation(compose.animation)
                 implementation(compose.material)
                 implementation(compose.components.resources)
 
@@ -30,6 +31,11 @@ kotlin {
 
                 // Image downloader
                 implementation("media.kamel:kamel-image:0.8.2")
+
+                // Compose Navigation
+                implementation("moe.tlaster:precompose:1.5.5")
+                implementation("moe.tlaster:precompose-viewmodel:1.5.5")
+                implementation("moe.tlaster:precompose-koin:1.5.5")
             }
         }
         val androidMain by getting {

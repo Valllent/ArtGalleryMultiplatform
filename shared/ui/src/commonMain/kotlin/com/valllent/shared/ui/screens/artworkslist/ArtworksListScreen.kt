@@ -96,14 +96,16 @@ fun ArtworksListScreen(
 @Composable
 fun ArtworkItem(
     artwork: Artwork,
-    onArtworkClick: () -> Unit,
+    onArtworkClick: (Artwork) -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(20.dp, 10.dp),
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        onClick = onArtworkClick
+        onClick = {
+            onArtworkClick(artwork)
+        }
     ) {
         Column {
             val imageUrl = artwork.imageUrl
@@ -136,7 +138,9 @@ fun ArtworkItem(
                 }
                 Button(
                     modifier = Modifier.align(Alignment.End),
-                    onClick = onArtworkClick
+                    onClick = {
+                        onArtworkClick(artwork)
+                    }
                 ) {
                     Text("Learn more")
                 }
