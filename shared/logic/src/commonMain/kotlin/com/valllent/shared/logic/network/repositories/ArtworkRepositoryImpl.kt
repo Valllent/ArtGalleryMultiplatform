@@ -22,4 +22,10 @@ class ArtworkRepositoryImpl(
         }
     }
 
+    override suspend fun searchArtworks(query: String, page: Int): ResultWrapper<List<Artwork>> {
+        return ResultWrapper.from {
+            artworkApi.searchArtworks(query, page).convert()
+        }
+    }
+
 }

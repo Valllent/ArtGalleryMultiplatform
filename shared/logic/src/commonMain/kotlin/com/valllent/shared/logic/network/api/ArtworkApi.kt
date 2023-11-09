@@ -7,6 +7,8 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
+private const val ARTWORKS_LIMIT = 10
+
 class ArtworkApi(
     private val client: HttpClient
 ) {
@@ -18,7 +20,21 @@ class ArtworkApi(
         return client
             .get("/api/v1/artworks/search") {
                 parameter("fields", "id,title,image_id,description")
-                parameter("limit", 10)
+                parameter("limit", ARTWORKS_LIMIT)
+                parameter("page", page)
+            }
+            .body()
+    }
+
+    /**
+     * [Fast browsing](https://api.artic.edu/api/v1/artworks/search?q=love&page=1&fields=id,title,image_id,description)
+     */
+    suspend fun searchArtworks(query: String, page: Int): ArtworkResponse {
+        return client
+            .get("/api/v1/artworks/search") {
+                parameter("limit", ARTWORKS_LIMIT)
+                parameter("q", query)
+                parameter("fields", "id,title,image_id,description")
                 parameter("page", page)
             }
             .body()

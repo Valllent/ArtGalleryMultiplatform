@@ -23,7 +23,7 @@ class DetailArtworkViewModel(
     }
 
     private fun loadArtwork() {
-        getScope().launch {
+        scope.launch {
             _state.value = DetailArtworkState.Loading
             val detailArtwork = getDetailArtworkUseCase(artworkId).resultOrNull()
 

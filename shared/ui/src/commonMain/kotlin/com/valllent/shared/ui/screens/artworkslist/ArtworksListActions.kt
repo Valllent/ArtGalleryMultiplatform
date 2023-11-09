@@ -6,4 +6,5 @@ data class ArtworksListActions(
     val onArtworkClick: (Artwork) -> Unit,
     val onRetryClick: () -> Unit,
     val onScrollToEnd: () -> Unit,
+    val onSearchClick: () -> Unit,
 )

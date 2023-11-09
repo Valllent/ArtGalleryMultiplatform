@@ -10,4 +10,6 @@ interface ArtworkRepository {
 
     suspend fun getDetailArtwork(id: Int): ResultWrapper<DetailArtwork>
 
+    suspend fun searchArtworks(query: String, page: Int): ResultWrapper<List<Artwork>>
+
 }

@@ -33,6 +33,22 @@ fun SharedApp() {
                         ArtworksListScreenType.Content(
                             onItemClick = {
                                 navigator.navigate(DetailArtworkScreenType.createRoute(artworkId = it.id))
+                            },
+                            onSearchClick = {
+                                navigator.navigate(SearchArtworkScreenType.createRoute())
+                            }
+                        )
+                    }
+
+                    scene(
+                        route = SearchArtworkScreenType.staticRoute
+                    ) {
+                        SearchArtworkScreenType.Content(
+                            onClickBack = {
+                                navigator.goBack()
+                            },
+                            onArtworkClick = {
+                                navigator.navigate(DetailArtworkScreenType.createRoute(it.id))
                             }
                         )
                     }

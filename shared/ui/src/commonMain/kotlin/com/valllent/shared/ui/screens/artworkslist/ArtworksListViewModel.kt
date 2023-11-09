@@ -17,16 +17,16 @@ class ArtworksListViewModel(
 
     private val _state = MutableStateFlow(
         ArtworksListState(
-            artworks = pager.state.value,
+            artworks = pager.state.value
         )
     )
     val state = _state.asStateFlow()
 
     init {
-        getScope().launch {
+        scope.launch {
             pager.loadFirstPageIfNotYet()
         }
-        getScope().launch {
+        scope.launch {
             pager.state.collect {
                 _state.value = _state.value.copy(artworks = it)
             }
@@ -34,7 +34,7 @@ class ArtworksListViewModel(
     }
 
     fun requestNextPage() {
-        getScope().launch {
+        scope.launch {
             pager.loadNextPage()
         }
     }

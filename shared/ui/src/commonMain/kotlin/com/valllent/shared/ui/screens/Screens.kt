@@ -9,20 +9,23 @@ import com.valllent.shared.ui.screens.artworkslist.ArtworksListViewModel
 import com.valllent.shared.ui.screens.detailartwork.DetailArtworkActions
 import com.valllent.shared.ui.screens.detailartwork.DetailArtworkScreen
 import com.valllent.shared.ui.screens.detailartwork.DetailArtworkViewModel
-import org.koin.compose.koinInject
+import com.valllent.shared.ui.screens.searchartwork.SearchArtworkActions
+import com.valllent.shared.ui.screens.searchartwork.SearchArtworkScreen
+import com.valllent.shared.ui.screens.searchartwork.SearchArtworkViewModel
+import moe.tlaster.precompose.koin.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 sealed class ScreenType(
     val staticRoute: String
 )
 
-object ArtworksListScreenType : ScreenType("artworks") {
+data object ArtworksListScreenType : ScreenType("artworks") {
 
     fun createRoute() = staticRoute
 
     @Composable
-    fun Content(onItemClick: (Artwork) -> Unit) {
-        val viewModel = koinInject<ArtworksListViewModel>()
+    fun Content(onItemClick: (Artwork) -> Unit, onSearchClick: () -> Unit) {
+        val viewModel = koinViewModel(vmClass = ArtworksListViewModel::class)
         val state = viewModel.state.collectAsState().value
         val actions = ArtworksListActions(
             onArtworkClick = {
@@ -33,6 +36,9 @@ object ArtworksListScreenType : ScreenType("artworks") {
             },
             onScrollToEnd = {
                 viewModel.requestNextPage()
+            },
+            onSearchClick = {
+                onSearchClick()
             }
         )
         ArtworksListScreen(state, actions)
@@ -40,7 +46,7 @@ object ArtworksListScreenType : ScreenType("artworks") {
 
 }
 
-object DetailArtworkScreenType : ScreenType("artworks/{artworkId}") {
+data object DetailArtworkScreenType : ScreenType("artworks/{artworkId}") {
 
     fun createRoute(artworkId: Long) = "artworks/$artworkId"
 
@@ -49,11 +55,9 @@ object DetailArtworkScreenType : ScreenType("artworks/{artworkId}") {
         artworkId: Long,
         onClickBack: () -> Unit,
     ) {
-        val viewModel = koinInject<DetailArtworkViewModel>(
-            parameters = {
-                parametersOf(artworkId)
-            }
-        )
+        val viewModel = koinViewModel(vmClass = DetailArtworkViewModel::class) {
+            parametersOf(artworkId)
+        }
         val state = viewModel.state.collectAsState().value
         val actions = DetailArtworkActions(
             onClickBack = onClickBack,
@@ -63,6 +67,39 @@ object DetailArtworkScreenType : ScreenType("artworks/{artworkId}") {
         )
 
         DetailArtworkScreen(state, actions)
+    }
+
+}
+
+data object SearchArtworkScreenType : ScreenType("artworks/search") {
+
+    fun createRoute() = "artworks/search"
+
+    @Composable
+    fun Content(
+        onClickBack: () -> Unit,
+        onArtworkClick: (Artwork) -> Unit,
+    ) {
+        val viewModel = koinViewModel(vmClass = SearchArtworkViewModel::class)
+        val state = viewModel.state.collectAsState().value
+        val actions = SearchArtworkActions(
+            onClickBack = onClickBack,
+            onSearchRequestChange = {
+                viewModel.setSearchRequest(it)
+            },
+            onSearchClick = {
+                viewModel.search()
+            },
+            onArtworkClick = onArtworkClick,
+            onRetryClick = {
+                viewModel.requestNextPage()
+            },
+            onScrollToEnd = {
+                viewModel.requestNextPage()
+            }
+        )
+
+        SearchArtworkScreen(state, actions)
     }
 
 }

@@ -1,9 +1,12 @@
 package com.valllent.shared.ui.screens
 
 import kotlinx.coroutines.CoroutineScope
+import moe.tlaster.precompose.viewmodel.ViewModel
+import moe.tlaster.precompose.viewmodel.viewModelScope
 
-expect abstract class BaseViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
-    fun getScope(): CoroutineScope
+    protected val scope: CoroutineScope
+        get() = viewModelScope
 
 }

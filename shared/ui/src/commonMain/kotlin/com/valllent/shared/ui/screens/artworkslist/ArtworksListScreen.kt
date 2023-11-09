@@ -3,20 +3,16 @@ package com.valllent.shared.ui.screens.artworkslist
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,9 +20,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.valllent.shared.logic.domain.data.Artwork
-import com.valllent.shared.ui.pagination.LoadingState
-import com.valllent.shared.ui.pagination.ScrollToEndTracker
-import com.valllent.shared.ui.views.elements.RetryIconButton
+import com.valllent.shared.ui.views.ArtworksList
+import com.valllent.shared.ui.views.elements.ProjectIconButtonWithText
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
@@ -35,61 +30,28 @@ fun ArtworksListScreen(
     state: ArtworksListState,
     actions: ArtworksListActions
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        when (state.artworks.firstLoadingState) {
-            LoadingState.LOADING -> {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-
-            LoadingState.FAILED -> {
-                RetryIconButton(
-                    modifier = Modifier.align(Alignment.Center),
-                    onClick = actions.onRetryClick
-                )
-            }
-
-            else -> {
-                val listState = rememberLazyListState()
-                ScrollToEndTracker(listState, event = actions.onScrollToEnd)
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    state = listState
-                ) {
-                    items(state.artworks.data) {
-                        ArtworkItem(it, actions.onArtworkClick)
-                    }
-                    if (state.artworks.appendLoadingState == LoadingState.LOADING) {
-                        item {
-                            Box(
-                                modifier = Modifier.fillMaxWidth()
-                                    .height(100.dp)
-                            ) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.align(Alignment.Center)
-                                )
-                            }
-                        }
-                    } else if (state.artworks.appendLoadingState == LoadingState.FAILED) {
-                        item {
-                            Box(
-                                modifier = Modifier.fillMaxWidth()
-                                    .height(100.dp)
-                            ) {
-                                RetryIconButton(
-                                    modifier = Modifier.align(Alignment.Center),
-                                    onClick = actions.onRetryClick
-                                )
-                            }
-                        }
+    ArtworksList(
+        artworks = state.artworks,
+        onScrollToEnd = actions.onScrollToEnd,
+        onRetryClick = actions.onRetryClick,
+        onArtworkClick = actions.onArtworkClick,
+        headItem = {
+            if (state.artworks.data.isNotEmpty()) {
+                item {
+                    Box(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        ProjectIconButtonWithText(
+                            text = "Search",
+                            modifier = Modifier.align(Alignment.Center).padding(8.dp),
+                            onClick = actions.onSearchClick,
+                            imageVector = Icons.Filled.Search
+                        )
                     }
                 }
             }
         }
-    }
+    )
 }
 
 @OptIn(ExperimentalMaterialApi::class)

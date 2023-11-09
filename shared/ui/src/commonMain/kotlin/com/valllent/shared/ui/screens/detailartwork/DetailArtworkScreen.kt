@@ -135,6 +135,7 @@ fun DetailArtworkScreen(
                             bottom = 10.dp
                         ),
                         text = artwork.ownersHistory,
+                        style = MaterialTheme.typography.body1,
                     )
                 }
             }

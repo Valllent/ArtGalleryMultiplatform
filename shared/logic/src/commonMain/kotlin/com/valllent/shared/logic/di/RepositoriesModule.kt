@@ -9,7 +9,7 @@ object RepositoriesModule {
 
     operator fun invoke(): Module {
         return module {
-            factory<ArtworkRepository> {
+            single<ArtworkRepository> {
                 ArtworkRepositoryImpl(get())
             }
         }

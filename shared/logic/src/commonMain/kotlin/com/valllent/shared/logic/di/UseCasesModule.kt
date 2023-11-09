@@ -2,6 +2,7 @@ package com.valllent.shared.logic.di
 
 import com.valllent.shared.logic.domain.usecases.GetArtworksUseCase
 import com.valllent.shared.logic.domain.usecases.GetDetailArtworkUseCase
+import com.valllent.shared.logic.domain.usecases.SearchArtworksUseCase
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -14,6 +15,9 @@ object UseCasesModule {
             }
             factory {
                 GetDetailArtworkUseCase(get())
+            }
+            factory {
+                SearchArtworksUseCase(get())
             }
         }
     }

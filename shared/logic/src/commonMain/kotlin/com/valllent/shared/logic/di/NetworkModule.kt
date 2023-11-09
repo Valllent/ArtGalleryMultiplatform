@@ -9,10 +9,10 @@ object NetworkModule {
 
     operator fun invoke(): Module {
         return module {
-            factory {
+            single {
                 Client.get()
             }
-            factory {
+            single {
                 ArtworkApi(get())
             }
         }
