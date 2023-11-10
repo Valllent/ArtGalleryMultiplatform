@@ -7,7 +7,7 @@ import com.valllent.shared.ui.pagination.LoadingState
 import com.valllent.shared.ui.pagination.PagerList
 import com.valllent.shared.ui.previews.data.PreviewArtworks
 import com.valllent.shared.ui.screens.artworkslist.ArtworksListActions
-import com.valllent.shared.ui.screens.artworkslist.ArtworksListScreen
+import com.valllent.shared.ui.screens.artworkslist.ArtworksListScreenView
 import com.valllent.shared.ui.screens.artworkslist.ArtworksListState
 
 private val actions = ArtworksListActions({}, {}, {}, {})
@@ -21,7 +21,7 @@ private fun createState(
 @Composable
 @Preview
 fun ArtworksListScreenPreview_Loading() {
-    ArtworksListScreen(
+    ArtworksListScreenView(
         state = createState(
             PagerList(
                 emptyList(),
@@ -36,7 +36,7 @@ fun ArtworksListScreenPreview_Loading() {
 @Composable
 @Preview
 fun ArtworksListScreenPreview_Failed() {
-    ArtworksListScreen(
+    ArtworksListScreenView(
         state = createState(
             PagerList(
                 emptyList(),
@@ -52,7 +52,7 @@ fun ArtworksListScreenPreview_Failed() {
 @Preview
 fun ArtworksListScreenPreview_ManyItems() {
     val list = PreviewArtworks.getList()
-    ArtworksListScreen(
+    ArtworksListScreenView(
         state = createState(
             PagerList(
                 list,
@@ -68,7 +68,7 @@ fun ArtworksListScreenPreview_ManyItems() {
 @Preview
 fun ArtworksListScreenPreview_OneItemWithAppendLoading() {
     val list = listOf(PreviewArtworks.getList().first())
-    ArtworksListScreen(
+    ArtworksListScreenView(
         state = createState(
             PagerList(
                 list,
