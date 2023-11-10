@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.valllent.shared.ui.screens.Screen
 import com.valllent.shared.ui.screens.detailartwork.DetailArtworkScreen
+import com.valllent.shared.ui.screens.fastinfodialog.FastInfoDialog
 import com.valllent.shared.ui.screens.searchartwork.SearchArtworkScreen
 import moe.tlaster.precompose.koin.koinViewModel
 import moe.tlaster.precompose.navigation.BackStackEntry
@@ -21,6 +22,9 @@ data object ArtworksListScreen : Screen() {
         val actions = ArtworksListActions(
             onArtworkClick = {
                 screenParams.navigator.navigate(DetailArtworkScreen.createRoute(artworkId = it.id))
+            },
+            onLearnMoreClick = {
+                screenParams.navigator.navigate(FastInfoDialog.createRoute(it))
             },
             onRetryClick = {
                 viewModel.requestNextPage()

@@ -14,12 +14,12 @@ class ArtworkApi(
 ) {
 
     /**
-     * [Fast browsing](https://api.artic.edu/api/v1/artworks/search?fields=id,title,image_id,description&limit=10&page=1)
+     * [Fast browsing](https://api.artic.edu/api/v1/artworks/search?fields=id,title,image_id,description,artist_title&limit=10&page=1)
      */
     suspend fun getArtworks(page: Int): ArtworkResponse {
         return client
             .get("/api/v1/artworks/search") {
-                parameter("fields", "id,title,image_id,description")
+                parameter("fields", "id,title,image_id,description,artist_title")
                 parameter("limit", ARTWORKS_LIMIT)
                 parameter("page", page)
             }

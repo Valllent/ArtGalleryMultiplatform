@@ -10,7 +10,7 @@ import com.valllent.shared.ui.screens.artworkslist.ArtworksListActions
 import com.valllent.shared.ui.screens.artworkslist.ArtworksListScreenView
 import com.valllent.shared.ui.screens.artworkslist.ArtworksListState
 
-private val actions = ArtworksListActions({}, {}, {}, {})
+private val actions = ArtworksListActions({}, {}, {}, {}, {})
 
 private fun createState(
     pagerList: PagerList<Artwork>,

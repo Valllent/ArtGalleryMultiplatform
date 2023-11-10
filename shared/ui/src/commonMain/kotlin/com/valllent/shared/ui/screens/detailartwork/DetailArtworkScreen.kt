@@ -17,7 +17,7 @@ data object DetailArtworkScreen : Screen() {
     @Composable
     override fun createComposable(screenParams: Params, backStackEntry: BackStackEntry) {
         val pathMap = backStackEntry.pathMap
-        val artworkId = pathMap["artworkId"]?.toLong() ?: 129884
+        val artworkId = pathMap["artworkId"]?.toLongOrNull() ?: 129884
 
         val viewModel = koinViewModel(vmClass = DetailArtworkViewModel::class) {
             parametersOf(artworkId)
@@ -32,7 +32,7 @@ data object DetailArtworkScreen : Screen() {
             }
         )
 
-        DetailArtworkScreen(state, actions)
+        DetailArtworkScreenView(state, actions)
     }
 
 }

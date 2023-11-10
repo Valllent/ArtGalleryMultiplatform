@@ -40,6 +40,7 @@ data class SearchArtworkActions(
     val onScrollToEnd: () -> Unit,
     val onRetryClick: () -> Unit,
     val onArtworkClick: (Artwork) -> Unit,
+    val onLearnMoreClick: (Artwork) -> Unit,
 )
 
 data class SearchArtworkState(
@@ -49,7 +50,7 @@ data class SearchArtworkState(
 )
 
 @Composable
-fun SearchArtworkScreen(
+fun SearchArtworkScreenView(
     state: SearchArtworkState,
     actions: SearchArtworkActions,
 ) {
@@ -113,6 +114,7 @@ fun SearchArtworkScreen(
                 onArtworkClick = actions.onArtworkClick,
                 onScrollToEnd = actions.onScrollToEnd,
                 onRetryClick = actions.onRetryClick,
+                onLearnMoreClick = actions.onLearnMoreClick,
                 headItem = {
                     item {
                         Box(

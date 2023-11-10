@@ -13,10 +13,28 @@ abstract class Screen {
     @Composable
     abstract fun createComposable(screenParams: Params, backStackEntry: BackStackEntry)
 
-    fun createScene(screenParams: Params) {
-        screenParams.routeBuilder.scene(getStaticRoute()) {
-            createComposable(screenParams, it)
+    fun createScene(
+        screenParams: Params,
+        type: Type = Type.SCENE,
+    ) {
+        when (type) {
+            Type.SCENE -> {
+                screenParams.routeBuilder.scene(getStaticRoute()) {
+                    createComposable(screenParams, it)
+                }
+            }
+
+            Type.DIALOG -> {
+                screenParams.routeBuilder.dialog(getStaticRoute()) {
+                    createComposable(screenParams, it)
+                }
+            }
         }
+    }
+
+    enum class Type {
+        SCENE,
+        DIALOG
     }
 
     data class Params(

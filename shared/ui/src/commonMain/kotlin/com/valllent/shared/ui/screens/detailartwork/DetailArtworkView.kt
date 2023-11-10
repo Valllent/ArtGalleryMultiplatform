@@ -49,7 +49,7 @@ sealed class DetailArtworkState {
 }
 
 @Composable
-fun DetailArtworkScreen(
+fun DetailArtworkScreenView(
     state: DetailArtworkState,
     actions: DetailArtworkActions
 ) {
@@ -163,39 +163,41 @@ fun DetailArtworkScreen(
         is DetailArtworkState.Loading -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    BackButton(
-                        modifier = Modifier,
-                        onClickBack = actions.onClickBack
-                    )
-                    CircularProgressIndicator(
-                        modifier = Modifier.padding(top = 8.dp),
-                    )
-                }
+                BackButton(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .padding(8.dp)
+                        .height(45.dp)
+                        .width(45.dp),
+                    onClickBack = actions.onClickBack
+                )
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(top = 8.dp)
+                )
             }
         }
 
         is DetailArtworkState.LoadingFailed -> {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.fillMaxSize()
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    BackButton(
-                        modifier = Modifier,
-                        onClickBack = actions.onClickBack
-                    )
-                    RetryIconButton(
-                        modifier = Modifier.padding(top = 8.dp),
-                        onClick = actions.onRetryClick
-                    )
-                }
+                BackButton(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .padding(8.dp)
+                        .height(45.dp)
+                        .width(45.dp),
+                    onClickBack = actions.onClickBack
+                )
+                RetryIconButton(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(top = 8.dp),
+                    onClick = actions.onRetryClick
+                )
             }
         }
     }

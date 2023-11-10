@@ -11,7 +11,7 @@ object HtmlRemover {
             REGEXP_LINE_BREAK,
             separator
         )
-        result = result.removeSuffix(separator)
+        result = result.removeSuffix(separator).removeSuffix(separator)
         return result.replace(REGEXP_REMOVE_HTML, "")
     }
 

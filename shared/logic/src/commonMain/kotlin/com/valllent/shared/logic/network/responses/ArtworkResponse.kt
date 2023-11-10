@@ -15,6 +15,7 @@ data class ArtworkResponse(
         val id: Long? = null,
         val title: String? = null,
         val description: String? = null,
+        @SerialName("artist_title") val artist: String? = null,
         @SerialName("image_id") val imageId: String? = null,
     )
 
@@ -29,8 +30,9 @@ data class ArtworkResponse(
                 Artwork(
                     id = id,
                     title = item.title ?: "",
+                    artist = item.artist ?: "",
                     description = descriptionWithoutHtml,
-                    imageUrl = if (item.imageId != null) "https://www.artic.edu/iiif/2/${item.imageId}/full/843,/0/default.jpg" else null
+                    imageUrl = if (item.imageId != null) "https://www.artic.edu/iiif/2/${item.imageId}/full/600,/0/default.jpg" else null
                 )
             )
         }

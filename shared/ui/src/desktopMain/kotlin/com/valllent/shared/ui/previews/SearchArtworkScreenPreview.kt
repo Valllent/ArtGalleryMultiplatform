@@ -6,16 +6,16 @@ import com.valllent.shared.ui.pagination.LoadingState
 import com.valllent.shared.ui.pagination.PagerList
 import com.valllent.shared.ui.previews.data.PreviewArtworks
 import com.valllent.shared.ui.screens.searchartwork.SearchArtworkActions
-import com.valllent.shared.ui.screens.searchartwork.SearchArtworkScreen
+import com.valllent.shared.ui.screens.searchartwork.SearchArtworkScreenView
 import com.valllent.shared.ui.screens.searchartwork.SearchArtworkState
 
 
-private val actions = SearchArtworkActions({}, {}, {}, {}, {}, {})
+private val actions = SearchArtworkActions({}, {}, {}, {}, {}, {}, {})
 
 @Preview
 @Composable
 fun SearchArtworkScreenPreview_Initial() {
-    SearchArtworkScreen(
+    SearchArtworkScreenView(
         state = SearchArtworkState("", "", null),
         actions = actions,
     )
@@ -24,7 +24,7 @@ fun SearchArtworkScreenPreview_Initial() {
 @Preview
 @Composable
 fun SearchArtworkScreenPreview_WithItems() {
-    SearchArtworkScreen(
+    SearchArtworkScreenView(
         state = SearchArtworkState(
             "love",
             "love",

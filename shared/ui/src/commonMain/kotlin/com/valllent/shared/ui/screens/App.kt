@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.valllent.shared.ui.screens.artworkslist.ArtworksListScreen
 import com.valllent.shared.ui.screens.detailartwork.DetailArtworkScreen
+import com.valllent.shared.ui.screens.fastinfodialog.FastInfoDialog
 import com.valllent.shared.ui.screens.searchartwork.SearchArtworkScreen
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
@@ -34,6 +35,8 @@ fun SharedApp() {
                     ArtworksListScreen.createScene(params)
                     DetailArtworkScreen.createScene(params)
                     SearchArtworkScreen.createScene(params)
+
+                    FastInfoDialog.createScene(params, Screen.Type.DIALOG)
                 }
             }
         }
